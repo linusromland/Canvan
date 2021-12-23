@@ -1,0 +1,8 @@
+# Typescript build directory
+dist/*
+
+# NPM installtion directory
+node_modules/*
+
+# Environment variables files
+.env*

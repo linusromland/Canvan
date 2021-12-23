@@ -4,6 +4,16 @@
 <p align="center">Canvan is a free and open source kanban board.<br><br>
 <a href="https://github.com/linusromland/Canvan/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a></p>
 
+## ⚡️ Setup
+
+### Frontend setup
+
+Check instruction for building frontend [here](/frontend/README.md)
+
+### Backend setup
+
+Check instruction for building backend [here](/backend/README.md)
+
 ## 📝 Contact
 
 If you find issues please report them on the [issue](https://github.com/linusromland/Canvan/issues) section of the repository.
