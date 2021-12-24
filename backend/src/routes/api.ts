@@ -3,10 +3,6 @@ import { checkAuthenticated } from '../middleware/authentication';
 
 const router = Router();
 
-router.get('/user', checkAuthenticated, async (req: Request, res: Response) => {
-	const user = await req.user;
-	if (!user) res.redirect('/');
-	res.json(user);
-});
+router.get('/user', checkAuthenticated, async (req: Request, res: Response) => res.json(await req.user));
 
 export default router;
