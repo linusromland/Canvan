@@ -21,13 +21,9 @@ router.get(
 		failureRedirect: '/error'
 	}),
 	async function (req: Request, res: Response) {
-		res.redirect('/api');
+		res.redirect('/');
 	}
 );
-
-router.get('/unauthorized', checkNotAuthenticated, async (req: Request, res: Response) => {
-	res.send('Unauthorized');
-});
 
 router.get('/logout', checkAuthenticated, (req: Request, res: Response) => {
 	//removes your session token and logs you out.
