@@ -7,6 +7,9 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('../views/Home.vue')
 	},
 	{
+		path: '/unauthorized',
+		name: 'Unauthorized',
+		component: () => import('../views/Unauthorized.vue')
 	}
 ];
 
