@@ -12,6 +12,12 @@ npm install
 npm run serve
 ```
 
+### Compiles to file and hot-reloads for development via Express.js
+
+```
+npm run watch
+```
+
 ### Compiles and minifies for production
 
 ```

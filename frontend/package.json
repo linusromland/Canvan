@@ -4,14 +4,15 @@
 	"private": true,
 	"scripts": {
 		"serve": "vue-cli-service serve",
+		"watch": "vue-cli-service build --watch --inline-vue",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {
 		"core-js": "^3.6.5",
+		"glob-parent": ">=5.1.2",
 		"vue": "^3.0.0",
-		"vue-router": "^4.0.0-0",
-		"glob-parent": ">=5.1.2"
+		"vue-router": "^4.0.0-0"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^4.18.0",
@@ -29,7 +30,8 @@
 		"eslint-plugin-vue": "^7.0.0",
 		"postcss": "^7.0.39",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-		"typescript": "~4.1.5"
+		"typescript": "~4.1.5",
+		"webpack-cli": "^4.9.1"
 	},
 	"eslintConfig": {
 		"root": true,
