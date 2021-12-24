@@ -8,15 +8,23 @@ import * as dotenv from 'dotenv';
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
 
+//Local Dependencies
+import { setup as passportSetup } from './passport';
+
 //Variable initialization
 const port = process.env.PORT || 3000;
 
 // Configuring express
 const app = express();
 
+//Passport Configuration
+passportSetup(app);
+
 //Routes import
 import apiRoutes from './routes/api';
 app.use('/api', apiRoutes);
+import authenticationRoutes from './routes/authentication';
+app.use('/auth', authenticationRoutes);
 
 //Configure Express for Vue History Mode
 app.use(history());
