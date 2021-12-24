@@ -55,4 +55,4 @@ export function setup(app: Express) {
 	);
 }
 
-exports.passport = passport;
+export { passport };

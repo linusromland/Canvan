@@ -23,6 +23,8 @@ passportSetup(app);
 //Routes import
 import apiRoutes from './routes/api';
 app.use('/api', apiRoutes);
+import authenticationRoutes from './routes/authentication';
+app.use('/auth', authenticationRoutes);
 
 //Configure Express for Vue History Mode
 app.use(history());
