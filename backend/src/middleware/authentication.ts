@@ -5,7 +5,7 @@ export async function checkAuthenticated(req: Request, res: Response, next: Next
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	res.redirect('/auth/unauthorized');
+	res.redirect('/unauthorized');
 }
 
 export function checkNotAuthenticated(req: Request, res: Response, next: NextFunction) {
