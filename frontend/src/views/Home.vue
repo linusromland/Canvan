@@ -1,7 +1,10 @@
 <template>
 	<p class="text-green-800">Home</p>
 	<p v-if="user.displayName">Logged in as: {{ user.displayName }}</p>
-	<a v-else href="/auth/google">Login</a>
+	<div v-else>
+		<a href="/auth/google">Login with google</a>
+		<a href="/auth/github">Login with github</a>
+	</div>
 </template>
 
 <script lang="ts">
@@ -17,6 +20,7 @@ export default {
 		async getUser() {
 			const request = await fetch('/api/user');
 			this.user = await request.json();
+			console.log(this.user);
 		}
 	},
 	created() {

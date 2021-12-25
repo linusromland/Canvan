@@ -18,12 +18,31 @@ router.get(
 router.get(
 	'/google/callback',
 	passport.authenticate('google', {
-		failureRedirect: '/error'
+		failureRedirect: '/unauthorized'
 	}),
-	async function (req: Request, res: Response) {
+	function (req: Request, res: Response) {
 		res.redirect('/');
 	}
 );
+
+router.get(
+	'/github',
+	passport.authenticate('github', {
+		scope: ['user:email']
+	})
+);
+
+router.get(
+	'/github/callback',
+	passport.authenticate('github', {
+		failureRedirect: '/unauthorized'
+	}),
+	function (req: Request, res: Response) {
+		res.redirect('/');
+	}
+);
+
+router.get('/error', (req: Request, res: Response) => res.send('Unknown Error'));
 
 router.get('/logout', checkAuthenticated, (req: Request, res: Response) => {
 	//removes your session token and logs you out.
