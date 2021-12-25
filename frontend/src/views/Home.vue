@@ -1,10 +1,7 @@
 <template>
 	<p class="text-green-800">Home</p>
 	<p v-if="user.displayName">Logged in as: {{ user.displayName }}</p>
-	<div v-else>
-		<a href="/auth/google">Login with google</a>
-		<a href="/auth/github">Login with github</a>
-	</div>
+	<router-link v-else to="/login">Login</router-link>
 </template>
 
 <script lang="ts">
