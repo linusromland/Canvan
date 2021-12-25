@@ -11,10 +11,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import LoginWithGoogle from '@/components/LoginWithGoogle.vue';
 import LoginWithGithub from '@/components/LoginWithGithub.vue';
 
-export default {
+export default defineComponent({
 	name: 'Login' as string,
 	components: { LoginWithGoogle, LoginWithGithub },
 	data() {
@@ -33,5 +34,5 @@ export default {
 		console.log(this);
 		this.getUser();
 	}
-};
+});
 </script>

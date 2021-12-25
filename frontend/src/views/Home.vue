@@ -1,27 +1,33 @@
 <template>
 	<p class="text-green-800">Home</p>
-	<p v-if="user.displayName">Logged in as: {{ user.displayName }}</p>
+	<p v-if="loggedIn">Logged in as: {{ displayName }}</p>
 	<router-link v-else to="/login">Login</router-link>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
 	name: 'Home' as string,
 	components: {},
 	data() {
 		return {
-			user: {} as object
+			loggedIn: false as boolean,
+			displayName: '' as string
 		};
 	},
 	methods: {
 		async getUser() {
 			const request = await fetch('/api/user');
-			this.user = await request.json();
-			console.log(this.user);
+			const user = await request.json();
+			if (user) {
+				this.loggedIn = true;
+				this.displayName = user.displayName;
+			}
 		}
 	},
 	created() {
 		this.getUser();
 	}
-};
+});
 </script>
