@@ -10,15 +10,20 @@ if (process.env.NODE_ENV === 'development') dotenv.config();
 
 //Local Dependencies
 import { setup as passportSetup } from './passport';
+import { setup as connectToMongoDB } from './database';
 
 //Variable initialization
 const port = process.env.PORT || 3000;
+const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
 
 // Configuring express
 const app = express();
 
 //Passport Configuration
 passportSetup(app);
+
+//Connecting to MongoDB
+connectToMongoDB('Canvan', mongoURL);
 
 //Routes import
 import apiRoutes from './routes/api';
