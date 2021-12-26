@@ -3,11 +3,10 @@ import { Request, Response, Router } from 'express';
 const router = Router();
 
 //Local Dependencies
-import { checkAuthenticated, checkNotAuthenticated } from '../middleware/authentication';
+import { checkAuthenticated } from '../middleware/authentication';
 import { passport } from '../passport';
 import { createUser, getInDBbyProviderID, updateUserInformation } from '../user';
 import { saveToDB } from '../database';
-import iUser from '../interfaces/User';
 
 router.get('/error', (req: Request, res: Response) => res.send('error logging in'));
 
