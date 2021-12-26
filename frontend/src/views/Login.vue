@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import LoginWithGoogle from '@/components/LoginWithGoogle.vue';
-import LoginWithGithub from '@/components/LoginWithGithub.vue';
+import LoginWithGoogle from '@/components/LoginWithGoogle/index.vue';
+import LoginWithGithub from '@/components/LoginWithGitHub/index.vue';
 
 export default defineComponent({
 	name: 'Login' as string,
