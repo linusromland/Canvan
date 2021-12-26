@@ -28,7 +28,7 @@ export function setup(app: Express) {
 			secret: process.env.SECRET || 'keyboard cat',
 			store: MongoStore.create({
 				mongoUrl: mongoURL,
-				dbName: 'ClientoryX'
+				dbName: 'Canvan'
 			}),
 			resave: true,
 			saveUninitialized: true
