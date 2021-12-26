@@ -1,6 +1,9 @@
 <template>
 	<p class="text-green-800">Home</p>
-	<p v-if="loggedIn">Logged in as: {{ displayName }}</p>
+	<div v-if="loggedIn">
+		<p>Logged in as: {{ displayName }}</p>
+		<a href="/auth/logout">Logout</a>
+	</div>
 	<router-link v-else to="/login">Login</router-link>
 </template>
 
