@@ -3,6 +3,10 @@ import iUser from '../interfaces/User';
 
 //Creates the Schema and exports it
 const UserSchema = new Schema({
+	providerID: {
+		type: String,
+		required: true
+	},
 	displayName: {
 		type: String,
 		required: true
@@ -18,9 +22,13 @@ const UserSchema = new Schema({
 	accountType: {
 		type: String,
 		required: true
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now
 	}
 });
 
 const User = model<iUser>('User', UserSchema);
 
-module.exports = User;
+export default User;

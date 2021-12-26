@@ -5,6 +5,9 @@ const router = Router();
 //Local Dependencies
 import { checkAuthenticated, checkNotAuthenticated } from '../middleware/authentication';
 import { passport } from '../passport';
+import { createUser, getInDBbyProviderID, updateUserInformation } from '../user';
+import { saveToDB } from '../database';
+import iUser from '../interfaces/User';
 
 router.get('/error', (req: Request, res: Response) => res.send('error logging in'));
 
@@ -20,7 +23,19 @@ router.get(
 	passport.authenticate('google', {
 		failureRedirect: '/unauthorized'
 	}),
-	function (req: Request, res: Response) {
+	async function (req: Request, res: Response) {
+		// TODO: Change from use of type any
+		const user: any = await req.user;
+		const userInDB = await getInDBbyProviderID(user.id);
+		if (!userInDB) {
+			if (user) {
+				const userModel = createUser(user.displayName, user.emails[0].value, 'google', user._json.picture, user.id);
+				await saveToDB(userModel);
+			}
+		} else {
+			if (user.displayName !== userInDB.displayName || user.email !== userInDB.email || user._json.picture !== user.profilePicture) await updateUserInformation(userInDB._id, user.displayName, user.emails[0].value, user._json.picture);
+		}
+
 		res.redirect('/');
 	}
 );
@@ -37,7 +52,19 @@ router.get(
 	passport.authenticate('github', {
 		failureRedirect: '/unauthorized'
 	}),
-	function (req: Request, res: Response) {
+	async function (req: Request, res: Response) {
+		// TODO: Change from use of type any
+		const user: any = await req.user;
+		const userInDB = await getInDBbyProviderID(user.id);
+		if (!userInDB) {
+			if (user) {
+				const userModel = createUser(user.displayName, user.emails[0].value, 'github', user.photos[0].value, user.id);
+				await saveToDB(userModel);
+			}
+		} else {
+			if (user.displayName !== userInDB.displayName || user.email !== userInDB.email || user.photos[0].value !== user.profilePicture) await updateUserInformation(userInDB._id, user.displayName, user.emails[0].value, user._json.picture);
+		}
+
 		res.redirect('/');
 	}
 );
