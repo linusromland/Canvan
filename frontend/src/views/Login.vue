@@ -12,6 +12,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
+//Components import
 import LoginWithGoogle from '@/components/LoginWithGoogle/index.vue';
 import LoginWithGithub from '@/components/LoginWithGitHub/index.vue';
 

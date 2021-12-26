@@ -1,18 +1,24 @@
 <template>
-	<p class="text-green-800">Home</p>
+	<Navbar></Navbar>
+	<!-- <p class="text-green-800">Home</p>
 	<div v-if="loggedIn">
 		<p>Logged in as: {{ displayName }}</p>
 		<a href="/auth/logout">Logout</a>
 	</div>
-	<router-link v-else to="/login">Login</router-link>
+	<router-link v-else to="/login">Login</router-link> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+//Components import
+import Navbar from '@/components/Navbar/index.vue';
+
 export default defineComponent({
 	name: 'Home' as string,
-	components: {},
+	components: {
+		Navbar
+	},
 	data() {
 		return {
 			loggedIn: false as boolean,
