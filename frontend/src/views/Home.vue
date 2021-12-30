@@ -1,11 +1,11 @@
 <template>
 	<Navbar></Navbar>
-	<!-- <p class="text-green-800">Home</p>
+	<p class="text-green-800">Home</p>
 	<div v-if="loggedIn">
 		<p>Logged in as: {{ displayName }}</p>
 		<a href="/auth/logout">Logout</a>
 	</div>
-	<router-link v-else to="/login">Login</router-link> -->
+	<router-link v-else to="/login">Login</router-link>
 </template>
 
 <script lang="ts">
