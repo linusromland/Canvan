@@ -1,40 +1,49 @@
 <template>
-	<div class="flex">
-		<draggable
-			tag="transition-group"
-			:component-data="{
-				tag: 'ul',
-				type: 'transition-group',
-				name: !drag ? 'flip-list' : null
-			}"
-			v-model="list"
-			v-bind="dragOptions"
-			@start="drag = true"
-			@end="drag = false"
-			item-key="order"
-		>
-			<template #item="{ element }">
-				<li>{{ element.name }}</li>
-			</template>
-		</draggable>
+	<Navbar></Navbar>
 
-		<draggable
-			tag="transition-group"
-			:component-data="{
-				tag: 'ul',
-				type: 'transition-group',
-				name: !drag ? 'flip-list' : null
-			}"
-			v-model="list2"
-			v-bind="dragOptions"
-			@start="drag = true"
-			@end="drag = false"
-			item-key="order"
-		>
-			<template #item="{ element }">
-				<li>{{ element.name }}</li>
-			</template>
-		</draggable>
+	<div class="flex m-2 min-h-fit">
+		<div class="bg-gray-200 p-4 m-2 min-h-full">
+			<h3 class="text-xl">Title:</h3>
+			<draggable
+				tag="transition-group"
+				:component-data="{
+					tag: 'ul',
+					type: 'transition-group',
+					name: !drag ? 'flip-list' : null
+				}"
+				v-model="list"
+				v-bind="dragOptions"
+				@start="drag = true"
+				@end="drag = false"
+				item-key="order"
+				class="h-full"
+			>
+				<template #item="{ element }">
+					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.name }}</li>
+				</template>
+			</draggable>
+		</div>
+		<div class="bg-gray-200 p-4 m-2 min-h-full">
+			<h3 class="text-xl">Title:</h3>
+			<draggable
+				tag="transition-group"
+				:component-data="{
+					tag: 'ul',
+					type: 'transition-group',
+					name: !drag ? 'flip-list' : null
+				}"
+				v-model="list2"
+				v-bind="dragOptions"
+				@start="drag = true"
+				@end="drag = false"
+				item-key="order"
+				class="h-full"
+			>
+				<template #item="{ element }">
+					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.name }}</li>
+				</template>
+			</draggable>
+		</div>
 	</div>
 </template>
 
@@ -43,14 +52,16 @@ import { defineComponent } from 'vue';
 
 //Components import
 import draggable from 'vuedraggable';
+import Navbar from '@/components/Navbar/index.vue';
 
-const message = ['Test1', 'Test2', 'Test3', 'Test4', 'Test5', 'Test6', 'Test6', 'Test7', 'Test8', 'Test9', 'Test10'];
-const message2 = ['1Test1', '1Test2', '1Test3', '1Test4', '1Test5', '1Test6', '1Test6', '1Test7', '1Test8', '1Test9', '1Test10'];
+const message = ['New Navbar', 'Edit User Page', 'Edit Board Page', 'Edit Card Page'];
+const message2 = ['Create Login System'];
 
 export default defineComponent({
 	name: 'Home' as string,
 	components: {
-		draggable
+		draggable,
+		Navbar
 	},
 	data() {
 		return {
