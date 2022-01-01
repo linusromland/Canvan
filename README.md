@@ -2,7 +2,9 @@
   <img src="brand/transparent.png" width="300px"/><br/>
 </h1>
 <p align="center">Canvan is a free and open source kanban board.<br><br>
-<a href="https://github.com/linusromland/Canvan/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a></p>
+<a href="https://github.com/linusromland/Canvan/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a>
+<a ><img src="https://img.shields.io/badge/Repo%20Status-WIP-yellow?style=for-the-badge&logo=none" alt="Repo Status" /></a>
+</p>
 
 ## ⚡️ Setup
 
@@ -31,4 +33,5 @@ If you want to say **thank you** or/and support active development of `Canvan`:
 `Canvan` is free and open-source software licensed under the [MIT License](https://github.com/linusromland/Canvan/blob/master/LICENSE).
 
 ### Development time (according to Wakapi)
+
 ![](https://img.shields.io/endpoint?url=https://wakaspace.eu/api/compat/shields/v1/linus/project:Canvan/interval:30_days&style=flat-square&color=blue&label=Last%2030%20days)
