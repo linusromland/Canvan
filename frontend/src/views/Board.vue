@@ -74,15 +74,6 @@ export default defineComponent({
 			})
 		};
 	},
-	methods: {
-		async getUser() {
-			const request = await fetch('/api/user');
-			const user = await request.json();
-			if (!user) {
-				window.location.href = '/unauthorized';
-			}
-		}
-	},
 	computed: {
 		dragOptions() {
 			return {
@@ -92,9 +83,6 @@ export default defineComponent({
 				ghostClass: 'ghost'
 			};
 		}
-	},
-	created() {
-		this.getUser();
 	}
 });
 </script>

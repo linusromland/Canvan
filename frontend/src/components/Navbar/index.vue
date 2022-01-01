@@ -37,7 +37,7 @@ export default defineComponent({
 	methods: {
 		async getUser() {
 			const request = await fetch('/api/user');
-			const user = await request.json();
+			const user = (await request.status) == 200 ? await request.json() : null;
 			if (user) {
 				this.loggedIn = true;
 				this.displayName = user.displayName;

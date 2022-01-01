@@ -1,8 +1,14 @@
 import { Request, Response, Router } from 'express';
-import { checkAuthenticated } from '../middleware/authentication';
 
 const router = Router();
 
-router.get('/user', checkAuthenticated, async (req: Request, res: Response) => res.json(await req.user));
+router.get('/user', async (req: Request, res: Response) => {
+	const user = await req.user;
+	if (user) {
+		res.json(user).status(200);
+	} else {
+		res.status(401).send('Unauthorized');
+	}
+});
 
 export default router;

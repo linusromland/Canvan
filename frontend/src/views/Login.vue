@@ -19,22 +19,6 @@ import LoginWithGithub from '@/components/LoginWithGitHub/index.vue';
 
 export default defineComponent({
 	name: 'Login' as string,
-	components: { LoginWithGoogle, LoginWithGithub },
-	data() {
-		return {};
-	},
-	methods: {
-		async getUser() {
-			const request = await fetch('/api/user');
-			const user = await request.json();
-			if (user) {
-				window.location.href = '/';
-			}
-		}
-	},
-	created() {
-		console.log(this);
-		this.getUser();
-	}
+	components: { LoginWithGoogle, LoginWithGithub }
 });
 </script>
