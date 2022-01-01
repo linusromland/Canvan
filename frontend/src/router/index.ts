@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
+const VUE_APP_TITLE = process.env.VUE_APP_TITLE || 'Canvan';
+
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
@@ -39,6 +41,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
+	document.title = `${String(to.name)} | ${VUE_APP_TITLE}`;
 	if (to.meta.authentication && !(await isLoggedIn())) {
 		return {
 			path: '/unauthorized'
