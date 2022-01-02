@@ -2,8 +2,8 @@
 	<Navbar></Navbar>
 
 	<div class="flex m-2 min-h-fit">
-		<div class="bg-gray-200 p-4 m-2 min-h-full">
-			<h3 class="text-xl">Title:</h3>
+		<div class="bg-gray-200 p-4 m-2 min-h-full" v-for="(column, index) in data.columns" :key="index">
+			<h3 class="text-xl">{{ column.title }}:</h3>
 			<draggable
 				tag="transition-group"
 				:component-data="{
@@ -11,28 +11,7 @@
 					type: 'transition-group',
 					name: !drag ? 'flip-list' : null
 				}"
-				v-model="list"
-				v-bind="dragOptions"
-				@start="drag = true"
-				@end="drag = false"
-				item-key="order"
-				class="h-full"
-			>
-				<template #item="{ element }">
-					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.name }}</li>
-				</template>
-			</draggable>
-		</div>
-		<div class="bg-gray-200 p-4 m-2 min-h-full">
-			<h3 class="text-xl">Title:</h3>
-			<draggable
-				tag="transition-group"
-				:component-data="{
-					tag: 'ul',
-					type: 'transition-group',
-					name: !drag ? 'flip-list' : null
-				}"
-				v-model="list2"
+				v-model="column.entries"
 				v-bind="dragOptions"
 				@start="drag = true"
 				@end="drag = false"
@@ -54,9 +33,6 @@ import { defineComponent } from 'vue';
 import draggable from 'vuedraggable';
 import Navbar from '@/components/Navbar/index.vue';
 
-const message = ['New Navbar', 'Edit User Page', 'Edit Board Page', 'Edit Card Page'];
-const message2 = ['Create Login System'];
-
 export default defineComponent({
 	name: 'Home' as string,
 	components: {
@@ -66,12 +42,7 @@ export default defineComponent({
 	data() {
 		return {
 			drag: false,
-			list: message.map((name, index) => {
-				return { name, order: index + 1 };
-			}),
-			list2: message2.map((name, index) => {
-				return { name, order: index + 1 };
-			})
+			data: {} as any
 		};
 	},
 	computed: {
@@ -82,6 +53,15 @@ export default defineComponent({
 				disabled: false,
 				ghostClass: 'ghost'
 			};
+		}
+	},
+	async created() {
+		const request = await fetch(`/api/board/${this.$route.query.id}`);
+		if ((await request.status) === 200) {
+			const data = await request.json();
+			this.data = data;
+		} else {
+			this.$router.push('/boards');
 		}
 	}
 });

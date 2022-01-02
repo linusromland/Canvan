@@ -2,8 +2,10 @@
 	<Navbar />
 	<div>
 		<button type="button" @click="newBoard = true">Create new Kanban Board</button>
-		<div v-for="(board, index) in boards" :key="index">
-			<p>{{ board.name }}</p>
+		<div class="w-full flex flex-col items-center">
+			<router-link v-for="(board, index) in boards" :key="index" :to="`/board?id=${board._id}`" class="w-11/12 bg-gray-300 hover:bg-gray-400 h-14 my-2">
+				<h3 class="text-2xl">{{ board.name }}</h3>
+			</router-link>
 		</div>
 	</div>
 	<newBoard v-if="newBoard" :boardCreated="newBoardCreated" id="transition" />

@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 import { Types } from 'mongoose';
 
 //Local Dependencies Import
-import { createBoard, getBoards } from '../board';
+import { createBoard, getBoards, getBoardById } from '../board';
 import { checkAuthenticated } from '../middleware/authentication';
 
 //Variable Declarations
@@ -44,6 +44,23 @@ router.post('/createBoard', checkAuthenticated, async (req: Request, res: Respon
 router.get('/boards', checkAuthenticated, async (req: Request, res: Response) => {
 	const boards = await getBoards();
 	res.json(boards).status(200);
+});
+
+/**
+ * @name get/board/id
+ * @description This route returns the board with the given id
+ */
+router.get('/board/:id', checkAuthenticated, async (req: Request, res: Response) => {
+	try {
+		const board = await getBoardById(new Types.ObjectId(req.params.id));
+		if (board) {
+			res.json(board).status(200);
+		} else {
+			res.status(404).send('Not Found');
+		}
+	} catch {
+		res.status(404).send('Not Found');
+	}
 });
 
 export default router;
