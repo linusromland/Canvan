@@ -18,6 +18,7 @@ const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
 
 //Configuring express
 const app = express();
+app.use(express.json());
 
 //Passport Configuration
 passportSetup(app);

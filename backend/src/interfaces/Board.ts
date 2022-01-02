@@ -1,7 +1,14 @@
+//External Dependencies import
+import { Types } from 'mongoose';
+
 //Local Dependencies Import
-import iColumnArr from './columnArr';
+import iColumnArray from './columnArray';
+import iBoardUser from './BoardUser';
 
 //Creates a Interface and exports it
 export default interface iBoard {
-	columns: Array<iColumnArr>;
+	_id: Types.ObjectId;
+	name: string;
+	columns: Array<iColumnArray>;
+	users: Array<iBoardUser>;
 }

@@ -1,5 +1,5 @@
 //Creates a Interface and exports it
-export default interface iColumnArr {
+export default interface iColumnArray {
 	title: string;
 	entries: Array<any>;
 }

@@ -1,5 +1,5 @@
 //External Dependencies import
-import { Schema, model } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 
 //Local Dependencies Import
 import iBoard from '../interfaces/Board';
@@ -22,27 +22,19 @@ const columnDefault = [
 
 //Creates the Schema
 const BoardSchema = new Schema({
+	name: {
+		type: String,
+		required: true
+	},
 	columns: {
 		type: Object,
 		default: columnDefault
 	},
-	users: {
-		user: {
-			type: Schema.Types.ObjectId,
-			ref: 'User'
-		},
-		permissions: {
-			type: String,
-			default: 'user'
-		},
-		joinedAt: {
-			type: Date,
-			default: Date.now
-		}
-	},
+	users: [],
 	createdBy: {
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+		type: Types.ObjectId,
+		ref: 'User',
+		required: true
 	},
 	createdAt: {
 		type: Date,
