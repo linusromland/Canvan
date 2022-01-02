@@ -5,12 +5,11 @@ import { connect, connection, ConnectOptions } from 'mongoose';
 let db;
 
 /**
+ * @name setup
  * @param  {} collectionname - The name of the collection
  * @param  {} connectURL - The URL to connect to MongoDB
- *
  * @returns null
- *
- * This function connects to MongoDB
+ * @description This function connects to MongoDB
  */
 export function setup(collectionname: string, connectURL: string) {
 	const dbLink = connectURL + collectionname;

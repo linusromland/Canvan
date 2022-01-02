@@ -20,6 +20,7 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
 /**
+ * @name setup
  * @param  {} app - The express app
  * @returns null
  * @description This function sets up the passport middleware

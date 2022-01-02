@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 /**
+ * @name checkAuthenticated
  * @param  {Request} req - The request object
  * @param  {Response} res - The response object
  * @param  {NextFunction} next - The function to execute after this one
@@ -18,6 +19,7 @@ export async function checkAuthenticated(req: Request, res: Response, next: Next
 }
 
 /**
+ * @name checkNotAuthenticated
  * @param  {Request} req - The request object
  * @param  {Response} res - The response object
  * @param  {NextFunction} next - The function to execute after this one

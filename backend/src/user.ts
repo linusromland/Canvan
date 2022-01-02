@@ -5,6 +5,7 @@ import { ObjectID } from 'mongodb';
 import User from './models/User';
 
 /**
+ * @name createUser
  * @param  {string} displayName? - The display name of the user
  * @param  {string} email? - The email of the user
  * @param  {string} accountType? - The account type of the user
@@ -30,6 +31,7 @@ export async function createUser(displayName?: string, email?: string, accountTy
 }
 
 /**
+ * @name getInDBbyProviderID
  * @param  {string} id - The providerID of the user
  * @returns {Promise<User>} - A promise that resolves to the user
  * @description This function returns a promise that resolves to the user with the given providerID
@@ -39,6 +41,7 @@ export async function getInDBbyProviderID(id: string) {
 }
 
 /**
+ * @name updateUserInformation
  * @param  {string} mongoID - The mongoID of the user
  * @param  {string} displayName? - The display name of the user
  * @param  {string} email? - The email of the user
