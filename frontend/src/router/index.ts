@@ -53,6 +53,11 @@ router.beforeEach(async (to, from) => {
 	}
 });
 
+/**
+ * @name isLoggedIn
+ * @returns {Promise<boolean>} - Returns true if the user is logged in
+ * @description This function checks if the user is logged in
+ */
 async function isLoggedIn() {
 	const request = await fetch('/api/user');
 	const user = (await request.status) == 200 ? await request.json() : null;

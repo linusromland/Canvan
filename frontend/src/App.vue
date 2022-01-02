@@ -2,4 +2,10 @@
 	<router-view />
 </template>
 
-<style></style>
+<!-- Default CSS -->
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+</style>
