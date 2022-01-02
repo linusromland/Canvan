@@ -1,3 +1,4 @@
+//Creates a Interface and exports it
 export default interface iUser {
 	displayName: string;
 	email: string;

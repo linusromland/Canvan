@@ -1,4 +1,4 @@
-//Dependencies
+//External Dependencies import
 import express from 'express';
 import ip from 'ip';
 import history from 'connect-history-api-fallback';
@@ -8,15 +8,15 @@ import * as dotenv from 'dotenv';
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
 
-//Local Dependencies
+//Local Dependencies Import
 import { setup as passportSetup } from './passport';
 import { setup as connectToMongoDB } from './database';
 
-//Variable initialization
+//Variable Declarations
 const port = process.env.PORT || 3000;
 const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
 
-// Configuring express
+//Configuring express
 const app = express();
 
 //Passport Configuration
@@ -27,8 +27,9 @@ connectToMongoDB('Canvan', mongoURL);
 
 //Routes import
 import apiRoutes from './routes/api';
-app.use('/api', apiRoutes);
 import authenticationRoutes from './routes/authentication';
+
+app.use('/api', apiRoutes);
 app.use('/auth', authenticationRoutes);
 
 //Configure Express for Vue History Mode

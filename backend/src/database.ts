@@ -1,14 +1,16 @@
-//Dependencies import
-import { connect, connection, HydratedDocument, ConnectOptions } from 'mongoose';
-import iUser from './interfaces/User';
+//External Dependencies import
+import { connect, connection, ConnectOptions } from 'mongoose';
 
+// Variable Declarations
 let db;
 
 /**
- * @param  {} collectionname
- * @param  {} connectURL
+ * @param  {} collectionname - The name of the collection
+ * @param  {} connectURL - The URL to connect to MongoDB
  *
- * This function creates a connection to MongoDB with the connectURl & to the collection specifed with collectionname
+ * @returns null
+ *
+ * This function connects to MongoDB
  */
 export function setup(collectionname: string, connectURL: string) {
 	const dbLink = connectURL + collectionname;
@@ -18,18 +20,6 @@ export function setup(collectionname: string, connectURL: string) {
 	db.on('error', console.error.bind(console, 'Error while connecting to MongoDB using the following mongoURL: "' + dbLink + '"'));
 	db.once('open', function () {
 		console.info('Connected to MongoDB using collection "' + collectionname + '"');
-	});
-}
-
-/**
- * @param  {} input
- *
- * This function takes input with type Model. Saves that model in Database.
- * ! Can't be used before connect()
- */
-export async function saveToDB(input: HydratedDocument<iUser>) {
-	await input.save(() => {
-		console.info('Saved model to Database');
 	});
 }
 

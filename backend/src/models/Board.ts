@@ -1,6 +1,10 @@
+//External Dependencies import
 import { Schema, model } from 'mongoose';
+
+//Local Dependencies Import
 import iBoard from '../interfaces/Board';
 
+//Variable Declarations
 const columnDefault = [
 	{
 		title: 'To Do',
@@ -16,7 +20,7 @@ const columnDefault = [
 	}
 ];
 
-//Creates the Schema and exports it
+//Creates the Schema
 const BoardSchema = new Schema({
 	columns: {
 		type: Object,
@@ -46,6 +50,8 @@ const BoardSchema = new Schema({
 	}
 });
 
+//Creates the model from Schema
 const Board = model<iBoard>('Board', BoardSchema);
 
+//Exports the model
 export default Board;

@@ -1,4 +1,4 @@
-//Dependencies import
+//External Dependencies import
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import passport from 'passport';
@@ -6,21 +6,23 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import { Express } from 'express';
 
-//Local Variables
+// Variable Declarations
 const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
+
 //Google Strategy
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
+
 //Github Strategy
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
 /**
- * @param  {} app
- *
- * This function initalizes passport for Google Login
+ * @param  {} app - The express app
+ * @returns null
+ * @description This function sets up the passport middleware
  */
 export function setup(app: Express) {
 	app.use(

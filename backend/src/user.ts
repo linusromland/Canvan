@@ -1,25 +1,51 @@
+//External Dependencies Import
+import { ObjectID } from 'mongodb';
+
+//Local Dependencies Import
 import User from './models/User';
-import * as MongoDB from 'mongodb';
 
-const ObjectID = MongoDB.ObjectID;
-
-export function createUser(displayName?: string, email?: string, accountType?: string, profilePicture?: string, id?: string) {
+/**
+ * @param  {string} displayName? - The display name of the user
+ * @param  {string} email? - The email of the user
+ * @param  {string} accountType? - The account type of the user
+ * @param  {string} profilePicture? - The profile picture of the user
+ * @param  {string} id? - The provider ID of the user
+ * @returns {Promise<User>} - The user object
+ * @description This function creates a new user
+ */
+export async function createUser(displayName?: string, email?: string, accountType?: string, profilePicture?: string, id?: string) {
+	// Creates a new user object
 	const user = new User({
 		displayName,
 		email,
 		accountType,
 		providerID: id
 	});
+
+	// If the user has a profile picture, save it
 	if (profilePicture) user.profilePicture = profilePicture;
-	console.log(user);
-	return user;
+
+	// Save the user
+	return await user.save();
 }
 
+/**
+ * @param  {string} id - The providerID of the user
+ * @returns {Promise<User>} - A promise that resolves to the user
+ * @description This function returns a promise that resolves to the user with the given providerID
+ */
 export async function getInDBbyProviderID(id: string) {
-	const user = await User.findOne({ providerID: id });
-	return user;
+	return await User.findOne({ providerID: id });
 }
 
+/**
+ * @param  {string} mongoID - The mongoID of the user
+ * @param  {string} displayName? - The display name of the user
+ * @param  {string} email? - The email of the user
+ * @param  {string} profilePicture? - The profile picture of the user
+ * @returns null
+ * @description This function updates the user in the database
+ */
 export async function updateUserInformation(mongoID: string, displayName?: string, email?: string, profilePicture?: string) {
 	await User.updateOne(
 		{

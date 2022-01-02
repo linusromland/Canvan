@@ -1,7 +1,10 @@
+//External Dependencies import
 import { Schema, model } from 'mongoose';
+
+//Local Dependencies Import
 import iUser from '../interfaces/User';
 
-//Creates the Schema and exports it
+//Creates the Schema
 const UserSchema = new Schema({
 	providerID: {
 		type: String,
@@ -29,6 +32,8 @@ const UserSchema = new Schema({
 	}
 });
 
+//Creates the model from Schema
 const User = model<iUser>('User', UserSchema);
 
+//Exports the model
 export default User;
