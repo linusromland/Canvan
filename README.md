@@ -3,7 +3,7 @@
 </h1>
 <p align="center">Canvan is a free and open source kanban board.<br><br>
 <a href="https://github.com/linusromland/Canvan/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a>
-<a ><img src="https://img.shields.io/badge/Repo%20Status-WIP-yellow?style=for-the-badge&logo=none" alt="Repo Status" /></a>
+<a ><img src="https://img.shields.io/badge/Repo%20Status-Work%20in%20Progress-yellow?style=for-the-badge&logo=none" alt="Repo Status" /></a>
 </p>
 
 ## ⚡️ Setup
