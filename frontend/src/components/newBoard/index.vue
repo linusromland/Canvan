@@ -3,15 +3,16 @@
 		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-if="!createdBoard">
 			<h3 class="text-xl m-5">Create a new Kanban Board</h3>
 			<input type="text" v-model="boardName" class="w-5/6 p-2 m-5 rounded-md bg-gray-200" placeholder="Kanban Board Name" />
-			<div class="flex w-5/6 px-6">
-				<input type="submit" class="w-1/2 p-2 rounded-md m-2 bg-red-600 hover:bg-red-400 text-white" value="Cancel" @click="close" />
-				<input type="submit" class="w-1/2 p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white" value="Create" @click="createBoard" />
-			</div>
 			<p class="text-red-600">{{ errorMessage }}</p>
+
+			<div class="flex w-5/6 px-6">
+				<input type="submit" class="w-1/2 p-2 rounded-md m-2 bg-red-600 hover:bg-red-400 text-white cursor-pointer" value="Cancel" @click="close" />
+				<input type="submit" class="w-1/2 p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" value="Create" @click="createBoard" />
+			</div>
 		</div>
 		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-else>
 			<h3 class="text-2xl m-5 text-green-500">Created board "{{ boardName }}"!</h3>
-			<button type="submit" class="w-5/6 p-2 rounded-md m-5 bg-red-500 hover:bg-red-400 text-white" @click="close">Close</button>
+			<button type="submit" class="w-5/6 p-2 rounded-md m-5 bg-red-500 hover:bg-red-400 text-white cursor-pointer" @click="close">Close</button>
 		</div>
 	</div>
 </template>

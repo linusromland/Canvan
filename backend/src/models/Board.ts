@@ -8,15 +8,18 @@ import iBoard from '../interfaces/Board';
 const columnDefault = [
 	{
 		title: 'To Do',
-		entries: []
+		entries: [],
+		id: new Types.ObjectId()
 	},
 	{
 		title: 'In Progress',
-		entries: []
+		entries: [],
+		id: new Types.ObjectId()
 	},
 	{
 		title: 'Done',
-		entries: []
+		entries: [],
+		id: new Types.ObjectId()
 	}
 ];
 

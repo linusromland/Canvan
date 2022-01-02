@@ -2,4 +2,5 @@
 export default interface iColumnArray {
 	title: string;
 	entries: Array<any>;
+	id: string;
 }

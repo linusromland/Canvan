@@ -1,5 +1,6 @@
 <template>
 	<Navbar></Navbar>
+	<input type="submit" class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" value="New Entry" @click="newEntryModal = true" />
 
 	<div class="flex m-2 min-h-fit">
 		<div class="bg-gray-200 p-4 m-2 min-h-full" v-for="(column, index) in data.columns" :key="index">
@@ -19,11 +20,12 @@
 				class="h-full"
 			>
 				<template #item="{ element }">
-					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.name }}</li>
+					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.title }}</li>
 				</template>
 			</draggable>
 		</div>
 	</div>
+	<newEntry v-if="newEntryModal" :entryCreated="closeEntry" :id="id" :columnID="columnID"></newEntry>
 </template>
 
 <script lang="ts">
@@ -32,17 +34,22 @@ import { defineComponent } from 'vue';
 //Components import
 import draggable from 'vuedraggable';
 import Navbar from '@/components/Navbar/index.vue';
+import newEntry from '@/components/NewEntry/index.vue';
 
 export default defineComponent({
 	name: 'Home' as string,
 	components: {
 		draggable,
-		Navbar
+		Navbar,
+		newEntry
 	},
 	data() {
 		return {
 			drag: false,
-			data: {} as any
+			data: {} as any,
+			id: '' as any,
+			columnID: '' as any,
+			newEntryModal: false
 		};
 	},
 	computed: {
@@ -55,14 +62,25 @@ export default defineComponent({
 			};
 		}
 	},
-	async created() {
-		const request = await fetch(`/api/board/${this.$route.query.id}`);
-		if ((await request.status) === 200) {
-			const data = await request.json();
-			this.data = data;
-		} else {
-			this.$router.push('/boards');
+	methods: {
+		async getData() {
+			const request = await fetch(`/api/board/${this.id}`);
+			if ((await request.status) === 200) {
+				const data = await request.json();
+				this.columnID = data.columns[0].id;
+				this.data = data;
+			} else {
+				this.$router.push('/boards');
+			}
+		},
+		closeEntry() {
+			this.newEntryModal = false;
+			this.getData();
 		}
+	},
+	created() {
+		this.id = this.$route.query.id;
+		this.getData();
 	}
 });
 </script>

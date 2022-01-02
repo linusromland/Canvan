@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 import { Types } from 'mongoose';
 
 //Local Dependencies Import
-import { createBoard, getBoards, getBoardById } from '../board';
+import { createBoard, getBoards, getBoardById, addEntry } from '../board';
 import { checkAuthenticated } from '../middleware/authentication';
 
 //Variable Declarations
@@ -60,6 +60,21 @@ router.get('/board/:id', checkAuthenticated, async (req: Request, res: Response)
 		}
 	} catch {
 		res.status(404).send('Not Found');
+	}
+});
+
+/**
+ * @name post/createEntry
+ * @description This route creates a new entry
+ */
+router.post('/createEntry', checkAuthenticated, async (req: Request, res: Response) => {
+	//TODO create interface for it
+	const user = (await req.user) as any;
+	if (user) {
+		await addEntry(new Types.ObjectId(req.body.boardId), req.body.title, req.body.description, new Types.ObjectId(user._id), req.body.columnID);
+		res.status(200).send('OK');
+	} else {
+		res.status(401).send('Unauthorized');
 	}
 });
 

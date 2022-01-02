@@ -79,3 +79,47 @@ export async function getBoards() {
 export async function getBoardById(boardId: Types.ObjectId) {
 	return await Board.findById(boardId);
 }
+
+/**
+ * @name addEntry
+ * @param  {Types.ObjectId} boardId - Board Id
+ * @param  {string} title - Title of the entry
+ * @param  {string} description - Description of the entry
+ * @param  {Types.ObjectId} createdBy - User Id of the user who created the entry
+ * @description This function adds a new entry to the board
+ */
+export async function addEntry(boardId: Types.ObjectId, title: string, description: string, createdBy: Types.ObjectId, columnID: string) {
+	const board = await getBoard(boardId);
+
+	if (board) {
+		const entry = {
+			title,
+			description,
+			createdBy,
+			createdAt: new Date()
+		};
+
+		const columns = board.columns;
+		for (let i = 0; i < columns.length; i++) {
+			const column = columns[i];
+			if (column.id.toString() === columnID) {
+				column.entries.push(entry);
+				break;
+			}
+		}
+
+		//Saves the entry
+		await Board.updateOne(
+			{ _id: boardId },
+			{
+				$set: {
+					columns
+				}
+			}
+		);
+
+		return entry;
+	} else {
+		return false;
+	}
+}
