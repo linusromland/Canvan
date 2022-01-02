@@ -1,6 +1,6 @@
 <template>
 	<Navbar></Navbar>
-	<input type="submit" class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" value="New Entry" @click="newEntryModal = true" />
+	<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="newEntryModal = true">New Entry</button>
 
 	<div class="flex m-2 min-h-fit">
 		<div class="bg-gray-200 p-4 m-2 min-h-full" v-for="(column, index) in data.columns" :key="index">

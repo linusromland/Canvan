@@ -1,7 +1,7 @@
 <template>
 	<Navbar />
 	<div>
-		<button type="button" @click="newBoard = true">Create new Kanban Board</button>
+		<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="newBoard = true">Create new Kanban Board</button>
 		<div class="w-full flex flex-col items-center">
 			<router-link v-for="(board, index) in boards" :key="index" :to="`/board?id=${board._id}`" class="w-11/12 bg-gray-300 hover:bg-gray-400 h-14 my-2">
 				<h3 class="text-2xl">{{ board.name }}</h3>
