@@ -6,7 +6,7 @@
 					<div>
 						<a href="/" class="flex items-center py-4 px-2">
 							<img src="@/assets/icon.svg" alt="Logo" class="h-8 w-8 mr-2" />
-							<span class="font-semibold text-gray-500 text-lg">Canban</span>
+							<span class="font-semibold text-gray-500 text-lg">Canvan</span>
 						</a>
 					</div>
 					<div class="flex items-center">
