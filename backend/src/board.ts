@@ -57,3 +57,11 @@ export async function addUser(boardId: Types.ObjectId, user: Types.ObjectId, per
 export async function getBoard(boardId: Types.ObjectId) {
 	return await Board.findById(boardId);
 }
+
+/**
+ * @returns {Promise<Board[]>} - Returns the boards
+ * @description This function returns all the boards
+ */
+export async function getBoards() {
+	return await Board.find();
+}
