@@ -1,7 +1,7 @@
 <template>
 	<div class="fixed inset-0 w-full h-full z-50 flex" id="transition">
 		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-if="!createdBoard">
-			<h3 class="text-xl m-5">Create a new Kanban Board</h3>
+			<h3 class="text-xl m-5">Create new board</h3>
 			<input type="text" v-model="boardName" class="w-5/6 p-2 m-5 rounded-md bg-gray-200" placeholder="Kanban Board Name" />
 			<p class="text-red-600">{{ errorMessage }}</p>
 
