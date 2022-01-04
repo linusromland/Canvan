@@ -35,8 +35,7 @@ const BoardSchema = new Schema({
 	},
 	users: [],
 	createdBy: {
-		type: Types.ObjectId,
-		ref: 'User',
+		type: String,
 		required: true
 	},
 	createdAt: {

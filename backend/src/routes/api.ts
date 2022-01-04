@@ -5,6 +5,7 @@ import { Types } from 'mongoose';
 //Local Dependencies Import
 import { createBoard, getBoards, getBoardById, addEntry } from '../board';
 import { checkAuthenticated } from '../middleware/authentication';
+import iUser from '../interfaces/User';
 
 //Variable Declarations
 const router = Router();
@@ -30,8 +31,9 @@ router.post('/createBoard', checkAuthenticated, async (req: Request, res: Respon
 	//TODO create interface for it
 	const user = (await req.user) as any;
 	if (user) {
-		await createBoard(req.body.name, new Types.ObjectId(user._id));
-		const boards = await getBoards();
+		console.log(user);
+		await createBoard(req.body.name, user.id);
+		const boards = await getBoards(user as iUser);
 
 		res.json(boards).status(200);
 	}
@@ -42,7 +44,8 @@ router.post('/createBoard', checkAuthenticated, async (req: Request, res: Respon
  * @description This route returns all the boards
  */
 router.get('/boards', checkAuthenticated, async (req: Request, res: Response) => {
-	const boards = await getBoards();
+	const user = await req.user;
+	const boards = await getBoards(user as iUser);
 	res.json(boards).status(200);
 });
 

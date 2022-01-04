@@ -4,4 +4,6 @@ export default interface iUser {
 	email: string;
 	profilePicture: string;
 	accountType: string;
+	_id: string;
+	id: string;
 }

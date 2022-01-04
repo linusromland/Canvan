@@ -3,26 +3,27 @@ import { Types } from 'mongoose';
 
 //Local Dependencies Import
 import Board from './models/Board';
+import iUser from './interfaces/User';
 
 /**
  * @name createBoard
  * @param  {string} name - Name of the board
- * @param  {Types.ObjectId} createdBy - User Id of the user who created the board
+ * @param  {string} userID - User Id of the user who created the board
  * @returns {Promise<Board>} - Returns the created board
  * @description This function creates a new board
  */
-export async function createBoard(name: string, createdBy: Types.ObjectId) {
-	if (name && createdBy) {
+export async function createBoard(name: string, userID: string) {
+	if (name && userID) {
 		const board = new Board({
 			name,
-			createdBy
+			createdBy: userID
 		});
 
 		//Saves the board
 		await board.save();
 
 		//Add the board owner to users and gives them owner permissions
-		return await addUser(board._id, createdBy, 'owner');
+		return await addUser(board._id, userID, 'owner');
 	} else {
 		return false;
 	}
@@ -31,18 +32,18 @@ export async function createBoard(name: string, createdBy: Types.ObjectId) {
 /**
  * @name addUser
  * @param  {Types.ObjectId} boardId - Board Id
- * @param  {Types.ObjectId} user - User Id
+ * @param  {string} userID - User Id
  * @param  {string} permissions - Permissions of the user
  * @returns {Promise<Board>} - Returns the updated board
  * @description This function adds a user to the board
  */
-export async function addUser(boardId: Types.ObjectId, user: Types.ObjectId, permissions: string) {
+export async function addUser(boardId: Types.ObjectId, userID: string, permissions: string) {
 	return await Board.updateOne(
 		{ _id: boardId },
 		{
 			$push: {
 				users: {
-					user,
+					user: userID,
 					permissions,
 					joinedAt: new Date()
 				}
@@ -66,8 +67,20 @@ export async function getBoard(boardId: Types.ObjectId) {
  * @returns {Promise<Board[]>} - Returns the boards
  * @description This function returns all the boards
  */
-export async function getBoards() {
-	return await Board.find();
+export async function getBoards(providerUser: iUser) {
+	if (providerUser) {
+		const boards = await Board.find({
+			users: {
+				$elemMatch: {
+					user: providerUser.id
+				}
+			}
+		});
+		console.log(boards);
+		return boards;
+	} else {
+		return [];
+	}
 }
 
 /**
