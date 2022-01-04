@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<newEntry v-if="newEntryModal" @close="closeEntry" :id="id" :columnID="columnID"></newEntry>
-	<settingsModal v-if="settingsModal" @close="closeSettings"></settingsModal>
+	<settingsModal v-if="settingsModal" @close="closeSettings" @updateSettings="updateSettings" :board="data"></settingsModal>
 </template>
 
 <script lang="ts">
@@ -85,7 +85,8 @@ export default defineComponent({
 		closeSettings() {
 			this.settingsModal = false;
 			this.getData();
-		}
+		},
+		updateSettings(data: string) {}
 	},
 	created() {
 		this.id = this.$route.query.id;
