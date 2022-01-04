@@ -62,7 +62,7 @@ export default defineComponent({
 			}
 		},
 		close() {
-			if (this.entryCreated) this.entryCreated();
+			this.$emit('close');
 		}
 	}
 });

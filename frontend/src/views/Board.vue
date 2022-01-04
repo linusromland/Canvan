@@ -26,7 +26,7 @@
 			</draggable>
 		</div>
 	</div>
-	<newEntry v-if="newEntryModal" :entryCreated="closeEntry" :id="id" :columnID="columnID"></newEntry>
+	<newEntry v-if="newEntryModal" @close="closeEntry" :id="id" :columnID="columnID"></newEntry>
 	<settingsModal v-if="settingsModal" @close="closeSettings"></settingsModal>
 </template>
 
