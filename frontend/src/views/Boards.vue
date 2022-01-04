@@ -9,7 +9,7 @@
 			</router-link>
 		</div>
 	</div>
-	<newBoard v-if="newBoard" :boardCreated="newBoardCreated" id="transition" />
+	<newBoard v-if="newBoard" @boardCreated="newBoardCreated" @close="closeNewBoard" id="transition" />
 </template>
 
 <script lang="ts">
@@ -38,6 +38,9 @@ export default defineComponent({
 		},
 		newBoardCreated(boards: Array<any>) {
 			if (boards.length > 0) this.boards = boards;
+			this.newBoard = false;
+		},
+		closeNewBoard() {
 			this.newBoard = false;
 		}
 	},

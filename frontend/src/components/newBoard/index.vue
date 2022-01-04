@@ -1,6 +1,6 @@
 <template>
 	<div class="fixed inset-0 w-full h-full z-50 flex" id="transition">
-		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-if="!createdBoard">
+		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-if="!error">
 			<h3 class="text-xl m-5">Create new board</h3>
 			<input type="text" v-model="boardName" class="w-5/6 p-2 m-5 rounded-md bg-gray-200" placeholder="Kanban Board Name" />
 			<p class="text-red-600">{{ errorMessage }}</p>
@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="m-auto w-2/6 bg-white p-5 rounded-md flex flex-col items-center" v-else>
-			<h3 class="text-2xl m-5 text-green-500">Created board "{{ boardName }}"!</h3>
+			<h3 class="text-2xl m-5 text-red-500">Unkown error!</h3>
 			<button type="submit" class="w-5/6 p-2 rounded-md m-5 bg-red-500 hover:bg-red-400 text-white cursor-pointer" @click="close">Close</button>
 		</div>
 	</div>
@@ -27,11 +27,8 @@ export default defineComponent({
 			boardName: '',
 			errorMessage: '',
 			boards: [] as Array<any>,
-			createdBoard: false
+			error: false
 		};
-	},
-	props: {
-		boardCreated: { type: Function }
 	},
 	methods: {
 		async createBoard() {
@@ -50,15 +47,19 @@ export default defineComponent({
 					})
 				});
 				const response = await request.json();
-				this.boards = response;
-				this.createdBoard = true;
+				if (response.error) {
+					this.error = true;
+					this.errorMessage = response.error;
+				} else {
+					this.$emit('boardCreated', response);
+					this.close();
+				}
 			}
 		},
 		close() {
 			this.boardName = '';
 			this.errorMessage = '';
-			this.createdBoard = false;
-			if (this.boardCreated) this.boardCreated(this.boards);
+			this.$emit('close');
 		}
 	}
 });
