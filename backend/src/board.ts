@@ -76,7 +76,6 @@ export async function getBoards(providerUser: iUser) {
 				}
 			}
 		});
-		console.log(boards);
 		return boards;
 	} else {
 		return [];
