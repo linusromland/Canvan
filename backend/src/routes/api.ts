@@ -31,7 +31,6 @@ router.post('/createBoard', checkAuthenticated, async (req: Request, res: Respon
 	//TODO create interface for it
 	const user = (await req.user) as any;
 	if (user) {
-		console.log(user);
 		await createBoard(req.body.name, user.id);
 		const boards = await getBoards(user as iUser);
 
