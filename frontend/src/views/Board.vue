@@ -1,6 +1,7 @@
 <template>
 	<Navbar></Navbar>
 	<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="newEntryModal = true">New Entry</button>
+	<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="settingsModal = true">Settings</button>
 
 	<div class="flex m-2 min-h-fit">
 		<div class="bg-gray-200 p-4 m-2 min-h-full" v-for="(column, index) in data.columns" :key="index">
@@ -26,6 +27,7 @@
 		</div>
 	</div>
 	<newEntry v-if="newEntryModal" :entryCreated="closeEntry" :id="id" :columnID="columnID"></newEntry>
+	<settingsModal v-if="settingsModal" @close="closeSettings"></settingsModal>
 </template>
 
 <script lang="ts">
@@ -35,13 +37,15 @@ import { defineComponent } from 'vue';
 import draggable from 'vuedraggable';
 import Navbar from '@/components/Navbar/index.vue';
 import newEntry from '@/components/NewEntry/index.vue';
+import settingsModal from '@/components/SettingsModal/index.vue';
 
 export default defineComponent({
 	name: 'Home' as string,
 	components: {
 		draggable,
 		Navbar,
-		newEntry
+		newEntry,
+		settingsModal
 	},
 	data() {
 		return {
@@ -49,7 +53,8 @@ export default defineComponent({
 			data: {} as any,
 			id: '' as any,
 			columnID: '' as any,
-			newEntryModal: false
+			newEntryModal: false,
+			settingsModal: false
 		};
 	},
 	computed: {
@@ -75,6 +80,10 @@ export default defineComponent({
 		},
 		closeEntry() {
 			this.newEntryModal = false;
+			this.getData();
+		},
+		closeSettings() {
+			this.settingsModal = false;
 			this.getData();
 		}
 	},
