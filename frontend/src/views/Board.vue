@@ -1,29 +1,46 @@
 <template>
 	<Navbar></Navbar>
-	<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="newEntryModal = true">New Entry</button>
-	<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="settingsModal = true">Settings</button>
-
-	<div class="flex m-2 min-h-fit">
-		<div class="bg-gray-200 p-4 m-2 min-h-full" v-for="(column, index) in data.columns" :key="index">
-			<h3 class="text-xl">{{ column.title }}:</h3>
-			<draggable
-				tag="transition-group"
-				:component-data="{
-					tag: 'ul',
-					type: 'transition-group',
-					name: !drag ? 'flip-list' : null
-				}"
-				v-model="column.entries"
-				v-bind="dragOptions"
-				@start="drag = true"
-				@end="drag = false"
-				item-key="order"
-				class="h-full"
-			>
-				<template #item="{ element }">
-					<li class="p-2 m-2 text-center rounded cursor-move bg-gray-300">{{ element.title }}</li>
-				</template>
-			</draggable>
+	<div class="flex justify-around">
+		<h2 class="text-2xl self-center">{{ data.name }}</h2>
+		<div>
+			<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="newEntryModal = true">New Entry</button>
+			<!-- Add check if admin -->
+			<button class="p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer" @click="settingsModal = true" v-if="true">Settings</button>
+		</div>
+	</div>
+	<hr />
+	<div class="w-full flex justify-center">
+		<div class="flex m-2 min-h-full w-10/12 justify-center">
+			<div class="bg-gray-200 p-4 m-2 min-h-full grow animate-container" v-for="(column, index) in data.columns" :key="index">
+				<h3 class="text-xl">{{ column.title }}:</h3>
+				<draggable
+					tag="transition-group"
+					:component-data="{
+						tag: 'ul',
+						type: 'transition-group',
+						name: !drag ? 'flip-list' : null
+					}"
+					v-model="column.entries"
+					v-bind="dragOptions"
+					@start="drag = true"
+					@end="drag = false"
+					item-key="order"
+					class="h-full"
+				>
+					<template #item="{ element }">
+						<li class="p-2 my-2 text-center rounded cursor-move bg-gray-300 flex justify-between h-20">
+							<div class="flex flex-col justify-around">
+								<h3 class="text-2xl">{{ element.title }}</h3>
+								<p class="text-sm" v-if="element.description">{{ element.description }}</p>
+							</div>
+							<div class="flex flex-col justify-around">
+								<p class="text-sm" v-if="element.createdAt"><b>Created by:</b> Linus Romland</p>
+								<p class="text-sm" v-if="element.createdAt">Created {{ formatDate(element.createdAt) }}</p>
+							</div>
+						</li>
+					</template>
+				</draggable>
+			</div>
 		</div>
 	</div>
 	<newEntry v-if="newEntryModal" @close="closeEntry" :id="id" :columnID="columnID"></newEntry>
@@ -32,6 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { format, TDate } from 'timeago.js';
 
 //Components import
 import draggable from 'vuedraggable';
@@ -63,7 +81,8 @@ export default defineComponent({
 				animation: 200,
 				group: 'description',
 				disabled: false,
-				ghostClass: 'ghost'
+				dragClass: 'ghost',
+				sort: false
 			};
 		}
 	},
@@ -86,7 +105,12 @@ export default defineComponent({
 			this.settingsModal = false;
 			this.getData();
 		},
-		updateSettings(data: string) {}
+		updateSettings(data: string) {
+			console.log(data);
+		},
+		formatDate(date: TDate) {
+			return format(date);
+		}
 	},
 	created() {
 		this.id = this.$route.query.id;
@@ -94,3 +118,12 @@ export default defineComponent({
 	}
 });
 </script>
+
+<style scoped>
+.grow {
+	flex-grow: 1;
+}
+.ghost {
+	display: none;
+}
+</style>
