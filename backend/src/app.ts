@@ -3,8 +3,9 @@ import express from 'express';
 import ip from 'ip';
 import history from 'connect-history-api-fallback';
 import path from 'path';
+import { createServer } from 'http';
+import { Server as socketIOServer } from 'socket.io';
 import * as dotenv from 'dotenv';
-
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
 
@@ -19,6 +20,17 @@ const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
 //Configuring express
 const app = express();
 app.use(express.json());
+
+//Socket.io Configuration
+const server = createServer(app);
+const io = new socketIOServer().listen(server);
+
+io.on('connection', (socket: any) => {
+	console.log('a user connected');
+	socket.on('disconnect', () => {
+		console.log('user disconnected');
+	});
+});
 
 //Passport Configuration
 passportSetup(app);
@@ -39,6 +51,6 @@ app.use(history());
 //Adds VueJS build
 app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
 
-app.listen(port, () => {
+server.listen(port, () => {
 	console.log(`\nApp running at:\n- Local: \x1b[36mhttp://localhost:${port}/\x1b[0m\n- Network \x1b[36mhttp://${ip.address()}:${port}/\x1b[0m\n\nTo run for production, run \x1b[36mnpm run start\x1b[0m`);
 });
