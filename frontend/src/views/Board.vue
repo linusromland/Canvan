@@ -79,9 +79,14 @@ export default defineComponent({
 		connect: function () {
 			console.log('socket connected');
 		},
-		customEmit: function (data: any) {
-			console.log('customEmit', data);
-			console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)');
+		disconnect: function () {
+			console.log('socket disconnected');
+		},
+		error: function () {
+			console.log('socket error');
+		},
+		test: function (data: any) {
+			console.log('socket test', data);
 		}
 	},
 	computed: {

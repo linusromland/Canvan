@@ -9,7 +9,7 @@ import socketIO from './socketio';
 //Imports default CSS
 import './style/index.css';
 
-//Creates a vue app and initializes the router
+//Creates a vue app and initializes the router & socketio
 const app = createApp(App);
 app.use(router);
 app.use(socketIO);

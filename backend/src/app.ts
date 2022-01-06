@@ -4,7 +4,7 @@ import ip from 'ip';
 import history from 'connect-history-api-fallback';
 import path from 'path';
 import * as dotenv from 'dotenv';
-import { io, server, setupSocketIO } from './socket';
+import { io, server, socketIOSetup } from './socket';
 
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
@@ -21,18 +21,20 @@ const mongoURL = process.env.MONGOURL || 'mongodb://localhost:27017/';
 const app = express();
 app.use(express.json());
 
+//Passport Configuration
+passportSetup(app);
+
 //Socket.io Configuration
-setupSocketIO(app);
+socketIOSetup(app);
 
 io.on('connection', (socket: any) => {
 	console.log('a user connected');
+	socket.emit('test', 'first message');
+
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
 });
-
-//Passport Configuration
-passportSetup(app);
 
 //Connecting to MongoDB
 connectToMongoDB('Canvan', mongoURL);
