@@ -75,6 +75,15 @@ export default defineComponent({
 			settingsModal: false
 		};
 	},
+	sockets: {
+		connect: function () {
+			console.log('socket connected');
+		},
+		customEmit: function (data: any) {
+			console.log('customEmit', data);
+			console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)');
+		}
+	},
 	computed: {
 		dragOptions() {
 			return {

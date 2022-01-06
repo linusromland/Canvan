@@ -3,9 +3,9 @@ import express from 'express';
 import ip from 'ip';
 import history from 'connect-history-api-fallback';
 import path from 'path';
-import { createServer } from 'http';
-import { Server as socketIOServer } from 'socket.io';
 import * as dotenv from 'dotenv';
+import { io, server, setupSocketIO } from './socket';
+
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
 
@@ -22,8 +22,7 @@ const app = express();
 app.use(express.json());
 
 //Socket.io Configuration
-const server = createServer(app);
-const io = new socketIOServer().listen(server);
+setupSocketIO(app);
 
 io.on('connection', (socket: any) => {
 	console.log('a user connected');
